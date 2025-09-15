@@ -1,0 +1,24 @@
+services:
+  websitepozo:
+    image: php:apache
+    depends_on:
+      - dbapi
+    ports:
+      - "80:80"
+    volumes:
+      - ./website:/var/www/html
+    environment:
+      - USERNAME=toto
+      - PASSWORD=python
+    networks:
+      - pozo_network
+
+  dbapi:
+    image: simple_api:v1
+    volumes:
+      - ./simple_api/:/data/
+    networks:
+      - pozo_network
+
+networks:
+  pozo_network:
